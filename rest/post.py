@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """Application entry point"""
-from flask import Flask, jsonify, abort, make_response
+from flask import Flask, jsonify, abort, make_response, request
 
 app = Flask(__name__)
 
@@ -41,7 +41,7 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-@app.route('/todo/api/V1/tasks', methods=['POST'])
+@app.route('/todo/api/V1.0/tasks/<int:task_id>', methods=['POST'])
 def create_task():
     """Creates a task"""
     if not request.json or not 'title' in request.json:
